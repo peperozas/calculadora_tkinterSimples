@@ -32,7 +32,7 @@ class Calculadora():
                 self.valores = event 
                 self.valor_resultado.set(self.valores)
                 
-            elif event in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "π"]:
+            elif event in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "π","√"]:
             
             
                 self.valores = self.valores + str(event)
@@ -56,6 +56,12 @@ class Calculadora():
             
             last_digit = self.valores[-1]
             
+            index_raiz = self.valores.rfind("√")
+            string_depois_raiz = self.valores[index_raiz+1:]
+            len_string = len(self.valores)
+            len_string_depois_raiz = len(string_depois_raiz)
+            
+            
             while "√" in self.valores and "+" not in self.valores and "-" not in self.valores and "*" not in self.valores and "/" not in self.valores:
                  #Quando o usuario quer somente fazer a raiz basica de alguma coisa
 
@@ -65,6 +71,31 @@ class Calculadora():
                 
                 self.valores = f"{self.valores[1:]}{new_raiz}"
                 
+            # while "√" in self.valores and (len_string-1 == len_string_depois_raiz+index_raiz):
+                
+            #     parte_raiz_sujo = self.valores.split("√")[1]
+
+
+            #     self.valores = f"{self.valores[:index_raiz]}({self.valores[index_raiz+1:]}**0.5)"
+                
+                
+            while "√" in self.valores:
+                 #Quando o usuario quer somente fazer a raiz basica de alguma coisa
+
+                index_raiz = self.valores.rfind("√")
+
+                parte_raiz_sujo = self.valores.split("√")[1]
+
+                for operador in ["+", "-", "*", "÷"]:
+                    
+                        index_op = parte_raiz_sujo.rfind(operador)
+                        
+                        if index_op != -1:
+                            
+                            parte_raiz = parte_raiz_sujo.split(operador)[0]
+                            resto_string = parte_raiz_sujo.split(operador)[1]
+                            
+                            self.valores = f"{self.valores[:index_raiz]}({parte_raiz}**0.5){operador}{resto_string}"
             
             if last_digit not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "π"]:
                 
