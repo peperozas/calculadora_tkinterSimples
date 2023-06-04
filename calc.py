@@ -39,7 +39,7 @@ class Calculadora():
                 
                 self.valor_resultado.set(self.valores)
                 
-            elif last_digit not in ["+", "-", "*", "÷"] and (event != "="):
+            elif last_digit not in ["+", "-", "*", "÷", "^"] and (event != "="):
                 
                 self.valores = self.valores + str(event)
                 
@@ -222,7 +222,7 @@ class Calculadora():
         
         
         
-        self.virgula = Button(master, font = self.font, text = ",",command = lambda: display_valores(","), borderwidth = 5, relief=RAISED, overrelief=RIDGE)
+        self.virgula = Button(master, font = self.font, text = ",",command = lambda: display_valores("."), borderwidth = 5, relief=RAISED, overrelief=RIDGE)
         
         self.virgula["padx"] = 7
         self.virgula["pady"] = 8
